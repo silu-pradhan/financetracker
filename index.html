@@ -23,7 +23,19 @@
               <span class="brand-mark" aria-hidden="true">FT</span>
               <strong>FinTrack</strong>
             </div>
-            <nav class="nav-list" aria-label="Dashboard sections">
+            <button
+              class="menu-toggle"
+              id="menuToggle"
+              type="button"
+              aria-label="Open section menu"
+              aria-expanded="false"
+              aria-controls="sectionNav"
+            >
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </button>
+            <nav class="nav-list" id="sectionNav" aria-label="Dashboard sections">
               <a class="active" href="#dashboard" aria-label="Overview"><span aria-hidden="true">D</span></a>
               <a href="#expenses" aria-label="Expenses"><span aria-hidden="true">E</span></a>
               <a href="#budget" aria-label="Budget"><span aria-hidden="true">B</span></a>
@@ -216,6 +228,10 @@
           </section>
         </main>
       </div>
+    </div>
+    <div class="toast hidden" id="budgetToast" role="status" aria-live="polite">
+      <strong>Budget saved</strong>
+      <span id="budgetToastText">Your monthly budget has been updated.</span>
     </div>
 
     <script src="js/config.js"></script>

@@ -10,6 +10,7 @@
 }
 
 .header-main {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -64,4 +65,56 @@
   color: #ffffff;
   border-radius: 999px;
   font-weight: 900;
+}
+
+.menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.menu-toggle span {
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 999px;
+}
+
+.toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 20;
+  display: grid;
+  gap: 4px;
+  max-width: min(320px, calc(100vw - 32px));
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid rgba(16, 169, 154, 0.38);
+  border-left: 5px solid var(--primary);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  transform: translateY(0);
+  opacity: 1;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.toast.hidden {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.toast strong {
+  color: var(--text);
+}
+
+.toast span {
+  color: var(--muted);
+  font-size: 0.9rem;
 }

@@ -47,9 +47,15 @@
     exportButton: document.querySelector("#exportButton"),
     themeToggle: document.querySelector("#themeToggle"),
     themeIcon: document.querySelector("#themeIcon"),
+    headerMain: document.querySelector(".header-main"),
+    menuToggle: document.querySelector("#menuToggle"),
+    sectionNav: document.querySelector("#sectionNav"),
+    budgetToast: document.querySelector("#budgetToast"),
+    budgetToastText: document.querySelector("#budgetToastText"),
     navLinks: document.querySelectorAll(".nav-list a"),
     componentLinks: document.querySelectorAll(".component-link"),
   };
+  let toastTimer = null;
 
   init();
 
@@ -70,9 +76,12 @@
     elements.categoryFilter.addEventListener("change", render);
     elements.exportButton.addEventListener("click", exportCSV);
     elements.themeToggle.addEventListener("click", toggleTheme);
+    elements.menuToggle.addEventListener("click", toggleMenu);
     elements.navLinks.forEach((link) => link.addEventListener("click", handleComponentLinkClick));
     elements.componentLinks.forEach((link) => link.addEventListener("click", handleComponentLinkClick));
+    document.addEventListener("click", closeMenuFromOutside);
     window.addEventListener("hashchange", updateActiveComponent);
+    window.addEventListener("resize", closeMenu);
     window.addEventListener("resize", () => spendingChart.drawChart(elements, getVisibleExpenses()));
 
     elements.expenseList.addEventListener("click", (event) => {
@@ -92,8 +101,26 @@
 
     event.preventDefault();
     history.pushState(null, "", hash);
+    closeMenu();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     updateActiveComponent();
+  }
+
+  function toggleMenu(event) {
+    event.stopPropagation();
+    const isOpen = elements.sectionNav.classList.toggle("open");
+    elements.menuToggle.setAttribute("aria-expanded", String(isOpen));
+  }
+
+  function closeMenu() {
+    elements.sectionNav.classList.remove("open");
+    elements.menuToggle.setAttribute("aria-expanded", "false");
+  }
+
+  function closeMenuFromOutside(event) {
+    if (elements.headerMain && elements.headerMain.contains(event.target)) return;
+    if (elements.sectionNav.contains(event.target) || elements.menuToggle.contains(event.target)) return;
+    closeMenu();
   }
 
   function updateActiveComponent() {
@@ -120,6 +147,20 @@
     monthlyBudget = Number.isFinite(value) && value > 0 ? value : 0;
     storage.saveBudget(monthlyBudget);
     render();
+    showBudgetToast(monthlyBudget);
+  }
+
+  function showBudgetToast(value) {
+    if (!elements.budgetToast || !elements.budgetToastText) return;
+
+    elements.budgetToastText.textContent = value > 0
+      ? `Monthly budget set to ${formatters.formatCurrency(value)}.`
+      : "Monthly budget has been cleared.";
+    elements.budgetToast.classList.remove("hidden");
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => {
+      elements.budgetToast.classList.add("hidden");
+    }, 2600);
   }
 
   function handleExpenseSubmit(event) {
