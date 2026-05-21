@@ -47,12 +47,8 @@
     exportButton: document.querySelector("#exportButton"),
     themeToggle: document.querySelector("#themeToggle"),
     themeIcon: document.querySelector("#themeIcon"),
-    headerMain: document.querySelector(".header-main"),
-    menuToggle: document.querySelector("#menuToggle"),
-    sectionNav: document.querySelector("#sectionNav"),
     budgetToast: document.querySelector("#budgetToast"),
     budgetToastText: document.querySelector("#budgetToastText"),
-    navLinks: document.querySelectorAll(".nav-list a"),
     componentLinks: document.querySelectorAll(".component-link"),
   };
   let toastTimer = null;
@@ -76,12 +72,8 @@
     elements.categoryFilter.addEventListener("change", render);
     elements.exportButton.addEventListener("click", exportCSV);
     elements.themeToggle.addEventListener("click", toggleTheme);
-    elements.menuToggle.addEventListener("click", toggleMenu);
-    elements.navLinks.forEach((link) => link.addEventListener("click", handleComponentLinkClick));
     elements.componentLinks.forEach((link) => link.addEventListener("click", handleComponentLinkClick));
-    document.addEventListener("click", closeMenuFromOutside);
     window.addEventListener("hashchange", updateActiveComponent);
-    window.addEventListener("resize", closeMenu);
     window.addEventListener("resize", () => spendingChart.drawChart(elements, getVisibleExpenses()));
 
     elements.expenseList.addEventListener("click", (event) => {
@@ -101,34 +93,12 @@
 
     event.preventDefault();
     history.pushState(null, "", hash);
-    closeMenu();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     updateActiveComponent();
   }
 
-  function toggleMenu(event) {
-    event.stopPropagation();
-    const isOpen = elements.sectionNav.classList.toggle("open");
-    elements.menuToggle.setAttribute("aria-expanded", String(isOpen));
-  }
-
-  function closeMenu() {
-    elements.sectionNav.classList.remove("open");
-    elements.menuToggle.setAttribute("aria-expanded", "false");
-  }
-
-  function closeMenuFromOutside(event) {
-    if (elements.headerMain && elements.headerMain.contains(event.target)) return;
-    if (elements.sectionNav.contains(event.target) || elements.menuToggle.contains(event.target)) return;
-    closeMenu();
-  }
-
   function updateActiveComponent() {
     const activeHash = window.location.hash || "#dashboard";
-
-    elements.navLinks.forEach((link) => {
-      link.classList.toggle("active", link.getAttribute("href") === activeHash);
-    });
 
     document.querySelectorAll(".component-focus").forEach((section) => {
       section.classList.remove("component-focus");
@@ -260,7 +230,7 @@
   function toggleTheme() {
     const isDark = document.body.classList.toggle("dark");
     storage.saveTheme(isDark ? "dark" : "light");
-    elements.themeIcon.textContent = isDark ? "Light" : "Dark";
+    elements.themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
     spendingChart.drawChart(elements, getVisibleExpenses());
   }
 
@@ -270,6 +240,6 @@
     const useDark = savedTheme ? savedTheme === "dark" : prefersDark;
 
     document.body.classList.toggle("dark", useDark);
-    elements.themeIcon.textContent = useDark ? "Light" : "Dark";
+    elements.themeToggle.setAttribute("aria-label", useDark ? "Switch to light mode" : "Switch to dark mode");
   }
 })();
