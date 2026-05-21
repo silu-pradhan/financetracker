@@ -10,7 +10,7 @@
 
 .toolbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 190px;
+  grid-template-columns: 190px;
   gap: 12px;
   margin-bottom: 16px;
 }
@@ -26,8 +26,8 @@
   gap: 14px;
   align-items: center;
   padding: 14px;
-  background: var(--surface-soft);
-  border: 1px solid transparent;
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   transition: border-color 160ms ease, transform 160ms ease;
 }

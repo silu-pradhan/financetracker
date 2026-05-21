@@ -8,7 +8,12 @@
     elements.totalExpenses.textContent = formatCurrency(total);
     elements.monthlyBudget.textContent = formatCurrency(monthlyBudget);
     elements.remainingBudget.textContent = formatCurrency(remaining);
-    elements.transactionCount.textContent = String(expenses.length);
+    elements.transactionCount.textContent = `${expenses.length} ${expenses.length === 1 ? "entry" : "entries"}`;
+
+    if (elements.monthlySavings) {
+      const savingsPercent = monthlyBudget > 0 ? Math.max(0, Math.round((remaining / monthlyBudget) * 100)) : 0;
+      elements.monthlySavings.textContent = `${savingsPercent}%`;
+    }
 
     const balanceCard = elements.remainingBudget.closest(".balance-card");
     balanceCard.classList.toggle("negative", remaining < 0);

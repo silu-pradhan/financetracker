@@ -1,6 +1,6 @@
 (function () {
   const { categories } = window.FinanceTracker.config;
-  const { formatCurrency } = window.FinanceTracker.formatters;
+  const { formatCompact, formatCurrency } = window.FinanceTracker.formatters;
 
   function drawChart(elements, items) {
     const categoryTotals = items.reduce((totals, expense) => {
@@ -14,8 +14,18 @@
 
     elements.chart.replaceChildren();
     elements.chartLegend.replaceChildren();
+    if (elements.monthlyChart) elements.monthlyChart.replaceChildren();
 
-    if (!entries.length) return;
+    renderDonut(elements, entries, totalValue);
+    renderMonthlyBars(elements, items);
+
+    if (!entries.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.innerHTML = "<strong>No expense data yet</strong><span>Add expenses to see category bars.</span>";
+      elements.chart.append(empty);
+      return;
+    }
 
     entries.forEach(([category, value]) => {
       const color = categories[category] || categories.Other;
@@ -46,6 +56,68 @@
 
       elements.chart.append(barItem);
       elements.chartLegend.append(legendItem);
+    });
+  }
+
+  function renderDonut(elements, entries, totalValue) {
+    if (!elements.categoryDonut || !elements.donutCenter || !elements.donutHint) return;
+
+    if (!entries.length || totalValue <= 0) {
+      elements.categoryDonut.style.background = "conic-gradient(var(--surface-soft) 0deg 360deg)";
+      elements.donutCenter.textContent = "0%";
+      elements.donutHint.textContent = "No expense data yet";
+      return;
+    }
+
+    let current = 0;
+    const segments = entries
+      .map(([category, value]) => {
+        const start = current;
+        const sweep = (value / totalValue) * 360;
+        current += sweep;
+        return `${categories[category] || categories.Other} ${start}deg ${current}deg`;
+      })
+      .join(", ");
+    const topShare = Math.round((Math.max(...entries.map(([, value]) => value)) / totalValue) * 100);
+
+    elements.categoryDonut.style.background = `conic-gradient(${segments})`;
+    elements.donutCenter.textContent = `${topShare}%`;
+    elements.donutHint.textContent = `${formatCurrency(totalValue)} tracked`;
+  }
+
+  function renderMonthlyBars(elements, items) {
+    if (!elements.monthlyChart) return;
+
+    const now = new Date();
+    const monthKeys = Array.from({ length: 6 }, (_, index) => {
+      const date = new Date(now.getFullYear(), now.getMonth() - (5 - index), 1);
+      return {
+        key: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
+        label: date.toLocaleDateString("en-IN", { month: "short" }),
+        total: 0,
+      };
+    });
+
+    items.forEach((expense) => {
+      const key = expense.date.slice(0, 7);
+      const month = monthKeys.find((item) => item.key === key);
+      if (month) month.total += expense.amount;
+    });
+
+    const maxMonth = Math.max(...monthKeys.map((month) => month.total), 0);
+
+    monthKeys.forEach((month) => {
+      const height = maxMonth > 0 ? Math.max(5, (month.total / maxMonth) * 100) : 5;
+      const bar = document.createElement("div");
+      bar.className = "month-bar";
+      bar.innerHTML = `
+        <div class="month-track">
+          <div class="month-fill" style="height: ${height}%;"></div>
+        </div>
+        <span class="month-value">${month.total ? formatCompact(month.total) : "Rs 0"}</span>
+        <span>${month.label}</span>
+      `;
+      elements.monthlyChart.append(bar);
     });
   }
 

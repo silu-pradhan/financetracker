@@ -31,9 +31,9 @@ select {
   width: 100%;
   min-height: 44px;
   padding: 10px 12px;
-  background: var(--surface-soft);
+  background: var(--bg);
   color: var(--text);
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   border-radius: 8px;
   transition: border-color 160ms ease, background 160ms ease;
 }
@@ -64,4 +64,8 @@ select:hover {
 
 .form-actions button {
   flex: 1 1 130px;
+}
+
+.toolbar {
+  justify-content: end;
 }

@@ -9,6 +9,10 @@
     elements.budgetMeterFill.classList.toggle("warning", usedPercent >= 75 && usedPercent < 100);
     elements.budgetMeterFill.classList.toggle("over", total > monthlyBudget && monthlyBudget > 0);
 
+    if (elements.budgetPercent) {
+      elements.budgetPercent.textContent = `${usedPercent.toFixed(1)}%`;
+    }
+
     if (!monthlyBudget) {
       elements.budgetHint.textContent = "Add your monthly budget to track spending.";
     } else if (remaining < 0) {

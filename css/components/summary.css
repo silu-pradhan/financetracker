@@ -1,13 +1,16 @@
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
 .summary-card {
-  min-height: 116px;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 148px;
+  padding: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -23,9 +26,44 @@
 
 .summary-card strong {
   display: block;
-  margin-top: 10px;
+  margin-top: 8px;
   font-size: 1.75rem;
   line-height: 1.1;
+}
+
+.summary-card small {
+  display: block;
+  margin-top: 8px;
+  color: var(--success);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.metric-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
+  font-weight: 900;
+}
+
+.metric-icon.wallet {
+  background: #dff8f3;
+  color: var(--primary);
+}
+
+.metric-icon.expense {
+  background: #ffe5e7;
+  color: #ef3e45;
+}
+
+.metric-icon.balance {
+  background: #e8efff;
+  color: var(--accent);
+}
+
+.metric-icon.savings {
+  background: #e0f8e9;
+  color: var(--success);
 }
 
 .balance-card.negative strong {

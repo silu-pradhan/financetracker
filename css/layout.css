@@ -1,27 +1,115 @@
 .app-shell {
-  width: min(1180px, calc(100% - 32px));
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  padding: 26px 16px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 14px 28px;
+  color: var(--text);
+  font-size: 1.4rem;
+}
+
+.brand-mark,
+.avatar,
+.metric-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.brand-mark {
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.nav-list {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.nav-list a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 58px;
+  padding: 0 18px;
+  color: var(--muted);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.nav-list a:hover,
+.nav-list a.active {
+  background: var(--surface-tint);
+  color: var(--primary);
+}
+
+.nav-list span {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  font-size: 0.72rem;
+}
+
+.sidebar-footer {
+  padding: 16px 14px 0;
+  border-top: 1px solid var(--border);
+}
+
+.workspace {
+  min-width: 0;
+  background: var(--bg);
+}
+
+main {
+  width: min(1510px, calc(100% - 80px));
   margin: 0 auto;
-  padding: 28px 0 40px;
+  padding: 30px 0 46px;
 }
 
 .content-grid {
   display: grid;
   grid-template-columns: 360px minmax(0, 1fr);
-  gap: 18px;
+  gap: 24px;
   align-items: start;
 }
 
-.left-column,
-.right-column {
+.visual-grid {
   display: grid;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 20px;
+  padding: 24px 30px;
   box-shadow: var(--shadow);
 }
 
