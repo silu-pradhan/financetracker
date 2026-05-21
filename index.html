@@ -16,37 +16,28 @@
   </head>
   <body>
     <div class="app-shell">
-      <aside class="sidebar" aria-label="Primary navigation">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">FT</span>
-          <strong>FinTrack</strong>
-        </div>
-        <nav class="nav-list" aria-label="Dashboard sections">
-          <a class="active" href="#dashboard"><span aria-hidden="true">D</span>Dashboard</a>
-          <a href="#expenses"><span aria-hidden="true">E</span>Expenses</a>
-          <a href="#budget"><span aria-hidden="true">B</span>Budget</a>
-          <a href="#analytics"><span aria-hidden="true">A</span>Analytics</a>
-        </nav>
-        <div class="sidebar-footer">
-          <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
-            <span id="themeIcon">Dark</span>
-          </button>
-        </div>
-      </aside>
-
       <div class="workspace">
         <header class="topbar">
-          <div>
-            <p class="eyebrow">Financial overview</p>
-            <h1>Good Afternoon, User</h1>
-            <span class="header-subtitle">Here is your expense and budget summary.</span>
+          <div class="header-main">
+            <div class="brand">
+              <span class="brand-mark" aria-hidden="true">FT</span>
+              <strong>FinTrack</strong>
+            </div>
+            <nav class="nav-list" aria-label="Dashboard sections">
+              <a class="active" href="#dashboard" aria-label="Overview"><span aria-hidden="true">D</span></a>
+              <a href="#expenses" aria-label="Expenses"><span aria-hidden="true">E</span></a>
+              <a href="#budget" aria-label="Budget"><span aria-hidden="true">B</span></a>
+              <a href="#analytics" aria-label="Analytics"><span aria-hidden="true">A</span></a>
+            </nav>
           </div>
           <div class="header-actions">
             <div class="search-shell">
-              <span aria-hidden="true">Search</span>
               <input id="searchInput" type="search" placeholder="Search expenses..." autocomplete="off" />
             </div>
             <button class="secondary-button" id="exportButton" type="button">Export CSV</button>
+            <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+              <span id="themeIcon">Dark</span>
+            </button>
             <span class="avatar" aria-label="User profile">U</span>
           </div>
         </header>
