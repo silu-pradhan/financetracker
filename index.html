@@ -52,42 +52,42 @@
         </header>
 
         <main id="dashboard">
-          <section class="summary-grid" aria-label="Finance summary">
-            <article class="summary-card">
+          <section class="summary-grid dashboard-component" aria-label="Finance summary">
+            <a class="summary-card component-link" href="#budget">
               <span class="metric-icon wallet" aria-hidden="true">Rs</span>
               <div>
                 <span>Total Budget</span>
                 <strong id="monthlyBudget">Rs 0</strong>
                 <small>Set monthly</small>
               </div>
-            </article>
-            <article class="summary-card">
+            </a>
+            <a class="summary-card component-link" href="#expenses">
               <span class="metric-icon expense" aria-hidden="true">-</span>
               <div>
                 <span>Total Expenses</span>
                 <strong id="totalExpenses">Rs 0</strong>
                 <small>This month</small>
               </div>
-            </article>
-            <article class="summary-card balance-card">
+            </a>
+            <a class="summary-card balance-card component-link" href="#budget">
               <span class="metric-icon balance" aria-hidden="true">=</span>
               <div>
                 <span>Remaining Balance</span>
                 <strong id="remainingBudget">Rs 0</strong>
                 <small>Available now</small>
               </div>
-            </article>
-            <article class="summary-card">
+            </a>
+            <a class="summary-card component-link" href="#analytics">
               <span class="metric-icon savings" aria-hidden="true">%</span>
               <div>
                 <span>Monthly Savings</span>
                 <strong id="monthlySavings">0%</strong>
                 <small>Of budget</small>
               </div>
-            </article>
+            </a>
           </section>
 
-          <section class="panel budget-panel" id="budget">
+          <section class="panel budget-panel dashboard-component" id="budget">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Budget progress</p>
@@ -108,7 +108,7 @@
             <p class="hint" id="budgetHint">Add your monthly budget to track spending.</p>
           </section>
 
-          <section class="visual-grid" id="analytics">
+          <section class="visual-grid dashboard-component" id="analytics">
             <section class="panel chart-panel">
               <div class="panel-heading">
                 <div>
@@ -142,8 +142,8 @@
             </section>
           </section>
 
-          <section class="content-grid">
-            <section class="panel" id="expenses">
+          <section class="content-grid dashboard-component" id="expenses">
+            <section class="panel">
               <div class="panel-heading">
                 <div>
                   <p class="eyebrow">Transaction</p>

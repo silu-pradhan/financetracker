@@ -91,6 +91,10 @@ main {
   padding: 30px 0 46px;
 }
 
+.dashboard-component {
+  scroll-margin-top: 22px;
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: 360px minmax(0, 1fr);
@@ -111,6 +115,25 @@ main {
   border-radius: 8px;
   padding: 24px 30px;
   box-shadow: var(--shadow);
+}
+
+.component-link {
+  color: inherit;
+}
+
+.component-link:hover {
+  border-color: rgba(16, 169, 154, 0.4);
+  transform: translateY(-2px);
+}
+
+.component-link:focus-visible {
+  outline: 3px solid rgba(16, 169, 154, 0.24);
+  outline-offset: 3px;
+}
+
+.dashboard-component.component-focus,
+.panel.component-focus {
+  box-shadow: 0 0 0 3px rgba(16, 169, 154, 0.18), var(--shadow);
 }
 
 .panel-heading {

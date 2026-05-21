@@ -47,6 +47,8 @@
     exportButton: document.querySelector("#exportButton"),
     themeToggle: document.querySelector("#themeToggle"),
     themeIcon: document.querySelector("#themeIcon"),
+    navLinks: document.querySelectorAll(".nav-list a"),
+    componentLinks: document.querySelectorAll(".component-link"),
   };
 
   init();
@@ -56,6 +58,7 @@
     elements.budgetInput.value = monthlyBudget || "";
     applySavedTheme();
     bindEvents();
+    updateActiveComponent();
     render();
   }
 
@@ -67,6 +70,9 @@
     elements.categoryFilter.addEventListener("change", render);
     elements.exportButton.addEventListener("click", exportCSV);
     elements.themeToggle.addEventListener("click", toggleTheme);
+    elements.navLinks.forEach((link) => link.addEventListener("click", handleComponentLinkClick));
+    elements.componentLinks.forEach((link) => link.addEventListener("click", handleComponentLinkClick));
+    window.addEventListener("hashchange", updateActiveComponent);
     window.addEventListener("resize", () => spendingChart.drawChart(elements, getVisibleExpenses()));
 
     elements.expenseList.addEventListener("click", (event) => {
@@ -77,6 +83,35 @@
       if (button.dataset.action === "edit") startEdit(id);
       if (button.dataset.action === "delete") deleteExpense(id);
     });
+  }
+
+  function handleComponentLinkClick(event) {
+    const hash = event.currentTarget.getAttribute("href");
+    const target = hash && document.querySelector(hash);
+    if (!target) return;
+
+    event.preventDefault();
+    history.pushState(null, "", hash);
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    updateActiveComponent();
+  }
+
+  function updateActiveComponent() {
+    const activeHash = window.location.hash || "#dashboard";
+
+    elements.navLinks.forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === activeHash);
+    });
+
+    document.querySelectorAll(".component-focus").forEach((section) => {
+      section.classList.remove("component-focus");
+    });
+
+    const target = document.querySelector(activeHash);
+    if (target && activeHash !== "#dashboard") {
+      target.classList.add("component-focus");
+      window.setTimeout(() => target.classList.remove("component-focus"), 900);
+    }
   }
 
   function handleBudgetSubmit(event) {
