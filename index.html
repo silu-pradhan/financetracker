@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Expense & Budget Manager</p>
+          <h1>Personal Finance Tracker</h1>
+        </div>
+        <div class="header-actions">
+          <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+            <span id="themeIcon">☾</span>
+          </button>
+          <button class="secondary-button" id="exportButton" type="button">Export CSV</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="summary-grid" aria-label="Finance summary">
+          <article class="summary-card">
+            <span>Total Expenses</span>
+            <strong id="totalExpenses">₹0</strong>
+          </article>
+          <article class="summary-card">
+            <span>Monthly Budget</span>
+            <strong id="monthlyBudget">₹0</strong>
+          </article>
+          <article class="summary-card balance-card">
+            <span>Remaining</span>
+            <strong id="remainingBudget">₹0</strong>
+          </article>
+          <article class="summary-card">
+            <span>Transactions</span>
+            <strong id="transactionCount">0</strong>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <div class="left-column">
+            <section class="panel budget-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Monthly limit</p>
+                  <h2>Budget</h2>
+                </div>
+              </div>
+              <form class="budget-form" id="budgetForm">
+                <label for="budgetInput">Set monthly budget</label>
+                <div class="inline-field">
+                  <input id="budgetInput" type="number" min="0" step="0.01" placeholder="25000" />
+                  <button type="submit">Save</button>
+                </div>
+              </form>
+              <div class="budget-meter" aria-label="Budget usage">
+                <div class="budget-meter-fill" id="budgetMeterFill"></div>
+              </div>
+              <p class="hint" id="budgetHint">Add your monthly budget to track spending.</p>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Transaction</p>
+                  <h2 id="formTitle">Add Expense</h2>
+                </div>
+              </div>
+              <form class="expense-form" id="expenseForm">
+                <div class="field">
+                  <label for="expenseTitle">Title</label>
+                  <input id="expenseTitle" type="text" placeholder="Lunch, bus pass, books" autocomplete="off" required />
+                </div>
+
+                <div class="form-row">
+                  <div class="field">
+                    <label for="expenseAmount">Amount</label>
+                    <input id="expenseAmount" type="number" min="0.01" step="0.01" placeholder="499" required />
+                  </div>
+                  <div class="field">
+                    <label for="expenseDate">Date</label>
+                    <input id="expenseDate" type="date" required />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="expenseCategory">Category</label>
+                  <select id="expenseCategory" required>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Bills">Bills</option>
+                    <option value="Health">Health</option>
+                    <option value="Education">Education</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <p class="form-error" id="formError" role="alert"></p>
+
+                <div class="form-actions">
+                  <button type="submit" id="submitExpense">Add Expense</button>
+                  <button class="secondary-button hidden" id="cancelEdit" type="button">Cancel Edit</button>
+                </div>
+              </form>
+            </section>
+          </div>
+
+          <div class="right-column">
+            <section class="panel chart-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Insight</p>
+                  <h2>Spending by Category</h2>
+                </div>
+              </div>
+              <div class="chart-wrap">
+                <canvas id="categoryChart" width="640" height="360" aria-label="Category spending chart"></canvas>
+                <div class="empty-overlay hidden" id="chartEmpty">No spending data yet</div>
+              </div>
+              <div class="legend" id="chartLegend"></div>
+            </section>
+
+            <section class="panel list-panel">
+              <div class="panel-heading list-heading">
+                <div>
+                  <p class="eyebrow">History</p>
+                  <h2>Expenses</h2>
+                </div>
+                <span class="result-count" id="resultCount">0 shown</span>
+              </div>
+
+              <div class="toolbar">
+                <div class="field search-field">
+                  <label for="searchInput">Search</label>
+                  <input id="searchInput" type="search" placeholder="Name or category" autocomplete="off" />
+                </div>
+                <div class="field filter-field">
+                  <label for="categoryFilter">Filter</label>
+                  <select id="categoryFilter">
+                    <option value="All">All categories</option>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Bills">Bills</option>
+                    <option value="Health">Health</option>
+                    <option value="Education">Education</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="expense-list" id="expenseList" aria-live="polite"></div>
+              <div class="empty-state hidden" id="emptyState">
+                <strong>No expenses found</strong>
+                <span>Add a new expense or adjust the current filters.</span>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
