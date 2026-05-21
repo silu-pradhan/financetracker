@@ -3,28 +3,96 @@
 }
 
 .chart-wrap {
-  position: relative;
   min-height: 260px;
 }
 
-canvas {
-  display: block;
-  width: 100%;
+.bar-chart {
+  display: grid;
+  gap: 14px;
+  min-height: 260px;
+  align-content: center;
+  padding: 10px 0 4px;
 }
 
-.empty-overlay {
-  position: absolute;
-  inset: 0;
+.bar-chart:empty {
+  min-height: 0;
+}
+
+.bar-chart-item {
   display: grid;
-  place-items: center;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.62);
+  gap: 9px;
+  padding: 12px;
+  background: linear-gradient(180deg, var(--surface), var(--surface-soft));
+  border: 1px solid var(--border);
   border-radius: 8px;
+}
+
+.bar-chart-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.bar-category,
+.bar-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar-category {
+  min-width: 0;
+  color: var(--text);
   font-weight: 700;
 }
 
-body.dark .empty-overlay {
-  background: rgba(23, 29, 41, 0.72);
+.bar-dot {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.bar-value {
+  flex: 0 0 auto;
+}
+
+.bar-value strong {
+  color: var(--text);
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.bar-value em {
+  min-width: 42px;
+  padding: 3px 7px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-style: normal;
+  font-weight: 800;
+  text-align: center;
+}
+
+.bar-track {
+  height: 14px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.bar-fill {
+  min-width: 28px;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: inset 0 -8px 14px rgba(0, 0, 0, 0.12);
+  transition: width 220ms ease;
 }
 
 .legend {
@@ -46,4 +114,16 @@ body.dark .empty-overlay {
   width: 10px;
   height: 10px;
   border-radius: 999px;
+}
+
+@media (max-width: 520px) {
+  .bar-chart-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .bar-value {
+    justify-content: space-between;
+    width: 100%;
+  }
 }

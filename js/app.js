@@ -37,7 +37,6 @@
     emptyState: document.querySelector("#emptyState"),
     resultCount: document.querySelector("#resultCount"),
     chart: document.querySelector("#categoryChart"),
-    chartEmpty: document.querySelector("#chartEmpty"),
     chartLegend: document.querySelector("#chartLegend"),
     exportButton: document.querySelector("#exportButton"),
     themeToggle: document.querySelector("#themeToggle"),
