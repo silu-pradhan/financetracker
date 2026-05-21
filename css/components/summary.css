@@ -1,0 +1,37 @@
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.summary-card {
+  min-height: 116px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.summary-card span,
+.result-count,
+.hint,
+.empty-state span {
+  color: var(--muted);
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.balance-card.negative strong {
+  color: var(--danger);
+}
+
+.balance-card.positive strong {
+  color: var(--success);
+}

@@ -1,0 +1,53 @@
+@media (max-width: 960px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100% - 22px, 1180px);
+    padding-top: 18px;
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .header-actions {
+    justify-content: flex-start;
+  }
+
+  .topbar h1 {
+    font-size: 1.72rem;
+  }
+
+  .summary-grid,
+  .form-row,
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card {
+    min-height: 96px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .expense-item {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-amount,
+  .item-actions {
+    text-align: left;
+    justify-content: flex-start;
+  }
+}

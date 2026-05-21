@@ -32,9 +32,31 @@ No installation or build step is required.
 
 ```text
 .
+├── css
+│   ├── base.css
+│   ├── layout.css
+│   ├── responsive.css
+│   └── components
+│       ├── budget.css
+│       ├── chart.css
+│       ├── expense-list.css
+│       ├── forms.css
+│       ├── header.css
+│       └── summary.css
+├── js
+│   ├── app.js
+│   ├── config.js
+│   ├── components
+│   │   ├── budgetManager.js
+│   │   ├── expenseForm.js
+│   │   ├── expenseList.js
+│   │   ├── spendingChart.js
+│   │   └── summaryCards.js
+│   ├── services
+│   │   └── storage.js
+│   └── utils
+│       └── formatters.js
 ├── index.html
-├── style.css
-├── script.js
 └── README.md
 ```
 

@@ -1,0 +1,35 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 2.1rem;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.icon-button {
+  display: inline-grid;
+  min-width: 58px;
+  height: 42px;
+  place-items: center;
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-size: 0.84rem;
+}

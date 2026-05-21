@@ -1,0 +1,106 @@
+.list-heading {
+  align-items: center;
+}
+
+.result-count {
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.expense-list {
+  display: grid;
+  gap: 10px;
+}
+
+.expense-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  background: var(--surface-soft);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.expense-item:hover {
+  border-color: var(--border);
+  transform: translateY(-1px);
+}
+
+.expense-main {
+  min-width: 0;
+}
+
+.expense-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.expense-title strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category-pill {
+  flex: 0 0 auto;
+  padding: 3px 8px;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.73rem;
+  font-weight: 800;
+}
+
+.expense-meta {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.expense-amount {
+  text-align: right;
+  font-size: 1.04rem;
+  font-weight: 800;
+}
+
+.item-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.small-button {
+  min-height: 34px;
+  padding: 0 10px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-size: 0.84rem;
+}
+
+.delete-button {
+  color: var(--danger);
+}
+
+.empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 30px 16px;
+  text-align: center;
+  background: var(--surface-soft);
+  border-radius: 8px;
+}

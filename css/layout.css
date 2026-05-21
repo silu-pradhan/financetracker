@@ -1,0 +1,40 @@
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.left-column,
+.right-column {
+  display: grid;
+  gap: 18px;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 1.18rem;
+  letter-spacing: 0;
+}
